@@ -5,9 +5,19 @@
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
   </div>
 
-  <div v-for="(product, idx) in products" :key="idx">
-    <h4> {{ product }}</h4>
-  </div>
+  <div>
+  <h4>{{products[0]}}</h4>
+  <p>50만원</p>
+  <button @click="nClick += 1">허위매물 신고</button> <span>신고 수: {{ nClick }}</span>
+</div>
+<div>
+  <h4>{{products[1]}}</h4>
+  <p>50만원</p>
+</div>
+<div>
+  <h4>{{products[2]}}</h4>
+  <p>50만원</p>
+</div>
 </template>
 
 <script>
@@ -16,8 +26,8 @@ export default {
   name: 'App',
   data(){
   return {
+    nClick: 0,
     products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
-    prices : [24000, 37000, 13000],
     menus : ['Home', 'Shop', 'About'],
   }
 }
