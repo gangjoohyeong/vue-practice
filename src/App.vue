@@ -8,15 +8,17 @@
   <div>
   <h4>{{products[0]}}</h4>
   <p>50만원</p>
-  <button @click="nClick += 1">허위매물 신고</button> <span>신고 수: {{ nClick }}</span>
+  <button @click="increase1">허위매물 신고</button> <span>신고 수: {{ nClicks[0] }}</span>
 </div>
 <div>
   <h4>{{products[1]}}</h4>
   <p>50만원</p>
+  <button @click="increase2">허위매물 신고</button> <span>신고 수: {{ nClicks[1] }}</span>
 </div>
 <div>
   <h4>{{products[2]}}</h4>
   <p>50만원</p>
+  <button @click="increase3">허위매물 신고</button> <span>신고 수: {{ nClicks[2] }}</span>
 </div>
 </template>
 
@@ -26,9 +28,20 @@ export default {
   name: 'App',
   data(){
   return {
-    nClick: 0,
+    nClicks: [0, 0, 0],
     products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
     menus : ['Home', 'Shop', 'About'],
+  }
+},
+methods : {
+  increase1() {
+    this.nClicks[0] += 1;
+  },
+  increase2() {
+    this.nClicks[1] += 1;
+  },
+  increase3() {
+    this.nClicks[2] += 1;
   }
 }
 }
