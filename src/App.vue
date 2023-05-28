@@ -4,6 +4,7 @@
     <div class="white-bg">
       <h4>상세페이지</h4>
       <p>상세페이지 내용임</p>
+      <button @click="modalIsOpen = false">닫기</button>
     </div>
   </div>
 
