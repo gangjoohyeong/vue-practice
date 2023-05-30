@@ -1,17 +1,12 @@
 <template>
-  <div class="black-bg" v-if="modalIsOpen == true">
-    <div class="white-bg">
-      <h4> {{ onerooms[isClick].title }} </h4>
-      <img :src="onerooms[isClick].image" class="room-img">
-      <p> {{ onerooms[isClick].content }} </p>
-      <p> {{ onerooms[isClick].price }}원 </p>
-    <button @click="modalIsOpen = false">닫기</button>
-    </div>
-  </div>
-
+  <DetailPage/>
   <div class="menu">
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
   </div>
+
+<DiscountBanner/>
+
+
 
 <div v-for="(oneroom, i) in onerooms" :key="i">
   <img :src="onerooms[i].image" class="room-img">
@@ -24,6 +19,8 @@
 <script>
 
 import data from './assets/oneroom.js';
+import DiscountBanner from './DiscountBanner.vue';
+import DetailPage from './DetailPage.vue';
 
 export default {
   name: 'App',
@@ -36,17 +33,15 @@ export default {
     menus : ['Home', 'Shop', 'About'],
   }
 },
-methods : {
-  increase1() {
-    this.nClicks[0] += 1;
+  methods : {
+    increase() {
+      this.nClick += 1;
+    },
   },
-  increase2() {
-    this.nClicks[1] += 1;
-  },
-  increase3() {
-    this.nClicks[2] += 1;
+  components: {
+    DiscountBanner : DiscountBanner,
+    DetailPage : DetailPage,
   }
-}
 }
 </script>
 
@@ -58,6 +53,13 @@ body {
 div {
   box-sizing : border-box;
 }
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
 .black-bg {
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.5);
