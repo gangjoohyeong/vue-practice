@@ -1,10 +1,11 @@
 <template>
-  
   <div class="black-bg" v-if="modalIsOpen == true">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지 내용임</p>
-      <button @click="modalIsOpen = false">닫기</button>
+      <h4> {{ onerooms[isClick].title }} </h4>
+      <img :src="onerooms[isClick].image" class="room-img">
+      <p> {{ onerooms[isClick].content }} </p>
+      <p> {{ onerooms[isClick].price }}원 </p>
+    <button @click="modalIsOpen = false">닫기</button>
     </div>
   </div>
 
@@ -12,38 +13,25 @@
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
   </div>
 
-
-
-
-
-  <div>
-  <img src="./assets/room0.jpg" class="room-img">
-  <h4 @click="modalIsOpen = true">{{products[0]}}</h4>
-  <p>50만원</p>
-  <button @click="increase1">허위매물 신고</button> <span>신고 수: {{ nClicks[0] }}</span>
-</div>
-<div>
-  <img src="./assets/room1.jpg" class="room-img">
-  <h4>{{products[1]}}</h4>
-  <p>50만원</p>
-  <button @click="increase2">허위매물 신고</button> <span>신고 수: {{ nClicks[1] }}</span>
-</div>
-<div>
-  <img src="./assets/room2.jpg" class="room-img">
-  <h4>{{products[2]}}</h4>
-  <p>50만원</p>
-  <button @click="increase3">허위매물 신고</button> <span>신고 수: {{ nClicks[2] }}</span>
+<div v-for="(oneroom, i) in onerooms" :key="i">
+  <img :src="onerooms[i].image" class="room-img">
+  <h4 @click="modalIsOpen = true; isClick = i">{{  onerooms[i].title }}</h4>
+  <p>{{ onerooms[i].price }}원</p>
 </div>
 </template>
 
+
 <script>
+
+import data from './assets/oneroom.js';
 
 export default {
   name: 'App',
   data(){
   return {
+    isClick : 0,
+    onerooms : data,
     modalIsOpen : false,
-    nClicks: [0, 0, 0],
     products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
     menus : ['Home', 'Shop', 'About'],
   }
@@ -90,7 +78,6 @@ div {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 10px;
 }
 
 .menu {
