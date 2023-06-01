@@ -5,7 +5,7 @@
       <img :src="onerooms[isClick].image" style="width:100%">
       <p> {{ onerooms[isClick].content }} </p>
       <p> {{ onerooms[isClick].price }}원 </p>
-    <!-- <button @click="modalIsOpen = false">닫기</button> -->
+    <button @click="$emit('closeModal')">닫기</button>
     </div>    
   </div>
 </template>

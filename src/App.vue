@@ -1,5 +1,5 @@
 <template>
-  <DetailPage :onerooms="onerooms" :isClick="isClick" :modalIsOpen="modalIsOpen" />
+  <DetailPage :onerooms="onerooms" :isClick="isClick" @closeModal="modalIsOpen = false" :modalIsOpen="modalIsOpen" />
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
@@ -7,14 +7,8 @@
 
   <DiscountBanner/>
 
+  <ProductCard @openModal="modalIsOpen = true; isClick = $event" :oneroom="onerooms[i]" v-for="(a, i) in onerooms" :key="a"/>
 
-<ProductCard :oneroom="onerooms[i]" v-for="(a, i) in onerooms" :key="a"/>
-
-<!-- <div v-for="(oneroom, i) in onerooms" :key="i"> -->
-  <!-- <img :src="onerooms[i].image" class="room-img"> -->
-  <!-- <h4 @click="modalIsOpen = true; isClick = i">{{  onerooms[i].title }}</h4> -->
-  <!-- <p>{{ onerooms[i].price }}원</p> -->
-<!-- </div> -->
 </template>
 
 
