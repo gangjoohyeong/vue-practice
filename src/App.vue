@@ -1,18 +1,20 @@
 <template>
-  <DetailPage/>
+  <DetailPage :onerooms="onerooms" :isClick="isClick" :modalIsOpen="modalIsOpen" />
+
   <div class="menu">
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
   </div>
 
-<DiscountBanner/>
+  <DiscountBanner/>
 
 
+<ProductCard :oneroom="onerooms[i]" v-for="(a, i) in onerooms" :key="a"/>
 
-<div v-for="(oneroom, i) in onerooms" :key="i">
-  <img :src="onerooms[i].image" class="room-img">
-  <h4 @click="modalIsOpen = true; isClick = i">{{  onerooms[i].title }}</h4>
-  <p>{{ onerooms[i].price }}원</p>
-</div>
+<!-- <div v-for="(oneroom, i) in onerooms" :key="i"> -->
+  <!-- <img :src="onerooms[i].image" class="room-img"> -->
+  <!-- <h4 @click="modalIsOpen = true; isClick = i">{{  onerooms[i].title }}</h4> -->
+  <!-- <p>{{ onerooms[i].price }}원</p> -->
+<!-- </div> -->
 </template>
 
 
@@ -21,6 +23,7 @@
 import data from './assets/oneroom.js';
 import DiscountBanner from './DiscountBanner.vue';
 import DetailPage from './DetailPage.vue';
+import ProductCard from './ProductCard.vue';
 
 export default {
   name: 'App',
@@ -41,6 +44,7 @@ export default {
   components: {
     DiscountBanner : DiscountBanner,
     DetailPage : DetailPage,
+    ProductCard : ProductCard,
   }
 }
 </script>

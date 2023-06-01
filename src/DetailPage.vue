@@ -5,14 +5,22 @@
       <img :src="onerooms[isClick].image" style="width:100%">
       <p> {{ onerooms[isClick].content }} </p>
       <p> {{ onerooms[isClick].price }}원 </p>
-    <button @click="modalIsOpen = false">닫기</button>
+    <!-- <button @click="modalIsOpen = false">닫기</button> -->
     </div>    
   </div>
 </template>
 
 <script>
 export default {
+  name : 'DetailPage',
+  data() {
 
+  },
+  props : {
+    onerooms : Array,
+    isClick: Number,
+    modalIsOpen: Boolean,
+  }
 }
 </script>
 
