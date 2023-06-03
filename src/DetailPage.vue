@@ -5,13 +5,13 @@
       <img :src="onerooms[isClick].image" style="width:100%">
       <p> {{ onerooms[isClick].content }} </p>
       <!-- <input @input="month = $event.target.value"> -->
-      <!-- <input v-model.number="month"> -->
-      <select v-model.number="month">
+      <input v-model.number="month">
+      <!-- <select v-model.number="month">
         <option>1개월</option>
         <option>3개월</option>
         <option>6개월</option>
         <option>12개월</option>
-      </select>
+      </select> -->
       <p> {{ month }}개월: {{ onerooms[isClick].price * month}}원 </p>
     <button @click="$emit('closeModal')">닫기</button>
     </div>    
@@ -26,6 +26,19 @@ export default {
       month : 1,
     }
   },
+  watch : {
+    month(x) {
+      if (x > 12) {
+        alert('12개월 이하만 가능합니다.');
+        this.month = 12;
+      }
+      if (isNaN(x) == true) {
+        alert('숫자만 입력 가능합니다.');
+        this.month = 1;
+      }
+    },
+  },
+
   props : {
     onerooms : Array,
     isClick: Number,
