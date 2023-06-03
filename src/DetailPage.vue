@@ -12,7 +12,7 @@
         <option>6개월</option>
         <option>12개월</option>
       </select> -->
-      <p> {{ month }}개월: {{ onerooms[isClick].price * month}}원 </p>
+      <p> {{ month }}개월: {{ (onerooms[isClick].price * month).toLocaleString() }}원 </p>
     <button @click="$emit('closeModal')">닫기</button>
     </div>    
   </div>
