@@ -1,15 +1,18 @@
 <template>
-  <!-- <div class="start" :class="{ end : modalIsOpen }"> -->
   <Transition name="fade">
     <DetailPage :onerooms="onerooms" :isClick="isClick" @closeModal="modalIsOpen = false" :modalIsOpen="modalIsOpen" />
   </Transition>
-  <!-- </div> -->
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
   </div>
 
-  <DiscountBanner/>
+  <DiscountBanner v-if="showDiscountBanner == true" :saleRate="saleRate"/>
+  <button @click="sortBack">기본 정렬</button>
+  <button @click="priceSortAsc">낮은 가격순 </button>
+  <button @click="priceSortDesc">높은 가격순</button>
+  <button @click="nameSortAsc">이름순</button>
+  <button @click="nameSortDesc">이름역순</button>
   <ProductCard @openModal="modalIsOpen = true; isClick = $event" :oneroom="onerooms[i]" v-for="(a, i) in onerooms" :key="a"/>
 </template>
 
@@ -25,18 +28,59 @@ export default {
   name: 'App',
   data(){
   return {
+    saleRate : 30,
+    showDiscountBanner : true,
+    sortItem : 0,
+    oneroomsOrigin : [...data],
     isClick : 0,
     onerooms : data,
     modalIsOpen : false,
     products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
-    menus : ['Home', 'Shop', 'About'],
+    menus : ['Home', 'Shop', 'MyPage'],
   }
 },
   methods : {
     increase() {
       this.nClick += 1;
     },
+    priceSortAsc() {
+      this.onerooms.sort(function(a, b) { return a.price-b.price } );
+    },
+    priceSortDesc() {
+      this.onerooms.sort(function(a, b) { return b.price-a.price } );
+    },
+    nameSortAsc() {
+      this.onerooms.sort(function(a, b) {
+        if(b.title < a.title) return 1;
+        if(b.title > a.title) return -1;
+        if(b.title === a.title) return 0;
+      });
+    },
+    nameSortDesc() {
+      this.onerooms.sort(function(a, b) {
+        if(a.title < b.title) return 1;
+        if(a.title > b.title) return -1;
+        if(b.title === b.title) return 0;
+      });
+    },
+    sortBack() {
+      this.onerooms = [...this.oneroomsOrigin];
+    },
   },
+
+  mounted() {
+    // setTimeout(()=> {
+    //   this.showDiscountBanner = false;
+    // }, 2000);
+    setInterval(() => {
+      this.saleRate = this.saleRate - 1;
+      if (this.saleRate == 0) {
+        this.saleRate = 30;
+      }
+    }, 1000); 
+    // 1초마다 실행하는 함수
+  },
+
   components: {
     DiscountBanner : DiscountBanner,
     DetailPage : DetailPage,
@@ -46,15 +90,6 @@ export default {
 </script>
 
 <style>
-
-/* .start {
-  opacity: 0;
-  transition: all 0.5s;
-}
-
-.end {
-  opacity: 1;
-} */
 
 .fade-enter-from {
   opacity: 0;

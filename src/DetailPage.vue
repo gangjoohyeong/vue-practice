@@ -43,7 +43,14 @@ export default {
     onerooms : Array,
     isClick: Number,
     modalIsOpen: Boolean,
+  },
+
+beforeUpdate() {
+  if (this.month == 2) {
+    alert('2개월은 판매하지 않습니다.');
+    this.month = 3;
   }
+},
 }
 </script>
 
