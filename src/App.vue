@@ -1,14 +1,16 @@
 <template>
-  <DetailPage :onerooms="onerooms" :isClick="isClick" @closeModal="modalIsOpen = false" :modalIsOpen="modalIsOpen" />
+  <!-- <div class="start" :class="{ end : modalIsOpen }"> -->
+  <Transition name="fade">
+    <DetailPage :onerooms="onerooms" :isClick="isClick" @closeModal="modalIsOpen = false" :modalIsOpen="modalIsOpen" />
+  </Transition>
+  <!-- </div> -->
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu"> {{ menu }}</a>
   </div>
 
   <DiscountBanner/>
-
   <ProductCard @openModal="modalIsOpen = true; isClick = $event" :oneroom="onerooms[i]" v-for="(a, i) in onerooms" :key="a"/>
-
 </template>
 
 
@@ -44,6 +46,36 @@ export default {
 </script>
 
 <style>
+
+/* .start {
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.end {
+  opacity: 1;
+} */
+
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 0.5s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 0.5s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+
 
 body {
   margin : 0
@@ -90,3 +122,4 @@ div {
   padding : 10px;
 }
 </style>
+
