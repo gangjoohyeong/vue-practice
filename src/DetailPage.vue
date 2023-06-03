@@ -4,7 +4,15 @@
       <h4> {{ onerooms[isClick].title }} </h4>
       <img :src="onerooms[isClick].image" style="width:100%">
       <p> {{ onerooms[isClick].content }} </p>
-      <p> {{ onerooms[isClick].price }}원 </p>
+      <!-- <input @input="month = $event.target.value"> -->
+      <!-- <input v-model.number="month"> -->
+      <select v-model.number="month">
+        <option>1개월</option>
+        <option>3개월</option>
+        <option>6개월</option>
+        <option>12개월</option>
+      </select>
+      <p> {{ month }}개월: {{ onerooms[isClick].price * month}}원 </p>
     <button @click="$emit('closeModal')">닫기</button>
     </div>    
   </div>
@@ -14,7 +22,9 @@
 export default {
   name : 'DetailPage',
   data() {
-
+    return {
+      month : 1,
+    }
   },
   props : {
     onerooms : Array,

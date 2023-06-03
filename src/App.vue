@@ -81,7 +81,7 @@ div {
 }
 
 .menu {
-  background : darkslateblue;
+  background : #162f9b;
   padding : 15px;
   border-radius : 5px;
 }
